@@ -1,14 +1,14 @@
 package swe.me.conversiontool;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
  * JUnit test file for testing Converter.java
  */
-class ConverterTest {
+public class ConverterTest {
 
     @Test
-    void testRetrieveOutput() {
+    public void testRetrieveOutput() {
         // TODO: fill in the empty void :(
     }
 
