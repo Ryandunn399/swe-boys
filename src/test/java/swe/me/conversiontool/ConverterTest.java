@@ -9,7 +9,7 @@ public class ConverterTest {
 
     @Test
     public void testRetrieveOutput() {
-        // TODO: fill in the empty void :(
+
     }
 
 }
