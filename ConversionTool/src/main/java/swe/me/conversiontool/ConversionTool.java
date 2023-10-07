@@ -17,8 +17,13 @@ import java.util.regex.Pattern;
 
 public class ConversionTool extends Application {
 
-    @Override
-    public void start(Stage stage) throws IOException {
+    /**
+     * Method used to build the grind pane for our JavaFX GUI as well as
+     * assign the various event handlers for the components of the GUI.
+     *
+     * @return a grid pane instance to be utilized by the JavaFX scene
+     */
+    private GridPane buildGui() {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(5);
@@ -31,23 +36,7 @@ public class ConversionTool extends Application {
         TextField inputField = new TextField();
         gridPane.add(inputField, 1, 0);
 
-        ArrayList<String> convertOptions = new ArrayList<>();
-        convertOptions.add("Fahrenheit");
-        convertOptions.add("Celsius");
-        convertOptions.add("Inches");
-        convertOptions.add("Centimeters");
-        convertOptions.add("Feet");
-        convertOptions.add("Meters");
-        convertOptions.add("Miles");
-        convertOptions.add("Kilometers");
-        convertOptions.add("Gallons");
-        convertOptions.add("Liters");
-        convertOptions.add("Ounces");
-        convertOptions.add("Grams");
-        convertOptions.add("Pounds");
-        convertOptions.add("Kilograms");
-        convertOptions.add("Hours");
-        convertOptions.add("Minutes");
+        ArrayList<String> convertOptions = getStringOptions();
 
         ArrayList<String> decimalOptions = new ArrayList<>();
         decimalOptions.add("0");
@@ -111,7 +100,7 @@ public class ConversionTool extends Application {
             // Retrieve input value
             String inputVal = inputField.getText();
 
-            if (inputVal == null || inputVal.equals("") || !isNumeric(inputVal)) {
+            if (inputVal == null || inputVal.isEmpty() || !isNumeric(inputVal)) {
                 inputVal = "0.0";
                 inputField.setText(inputVal);
             }
@@ -128,7 +117,42 @@ public class ConversionTool extends Application {
 
         gridPane.add(convertButton, 1, 5);
 
-        Scene scene = new Scene(gridPane, 400, 250);
+        return gridPane;
+    }
+
+    /**
+     * Will build the list of available options present in our conversion program.
+     *
+     * @return A list of strings.
+     */
+    protected ArrayList<String> getStringOptions() {
+        ArrayList<String> options = new ArrayList<>();
+
+        options.add("Fahrenheit");
+        options.add("Celsius");
+        options.add("Inches");
+        options.add("Centimeters");
+        options.add("Feet");
+        options.add("Meters");
+        options.add("Miles");
+        options.add("Kilometers");
+        options.add("Gallons");
+        options.add("Liters");
+        options.add("Ounces");
+        options.add("Grams");
+        options.add("Pounds");
+        options.add("Kilograms");
+        options.add("Hours");
+        options.add("Minutes");
+        options.add("MPH");
+        options.add("KPH");
+
+        return options;
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        Scene scene = new Scene(buildGui(), 400, 250);
         stage.setTitle("Conversion Tool");
         stage.setScene(scene);
         stage.show();
@@ -140,7 +164,7 @@ public class ConversionTool extends Application {
      * @param numDecimal the number of decimals
      * @return the correctly formatted string value.
      */
-    private String retrieveOutput(float val, int numDecimal) {
+    protected String retrieveOutput(float val, int numDecimal) {
         return switch (numDecimal) {
             case 0 -> String.format("%d", (int) val);
             case 1 -> String.format("%.1f", val);
@@ -161,93 +185,96 @@ public class ConversionTool extends Application {
      * @param systemFrom the system we are converting from.
      * @return the value of the system we need to convert to.
      */
-    private float convert(String value, String systemFrom) {
-        float returnVal = 0.0f;
+    public float convert(String value, String systemFrom) {
 
         if (systemFrom == null)
             return -1.0f;
 
         // Fahrenheit to celsius
         if (systemFrom.equalsIgnoreCase("Fahrenheit")) {
-            returnVal = convertF2C(value);
+            return convertF2C(value);
         }
 
         // Celsius to fahrenheit
         if (systemFrom.equalsIgnoreCase("Celsius")){
-            returnVal = convertC2F(value);
+            return convertC2F(value);
         }
 
         // Inches to centimeters
         if (systemFrom.equalsIgnoreCase("Inches")) {
-            returnVal = convertIn2Cm(value);
+            return convertIn2Cm(value);
         }
 
         // Centimeters to inches
         if (systemFrom.equalsIgnoreCase("Centimeters")){
-            returnVal = convertCm2In(value);
+            return convertCm2In(value);
         }
 
         // Feet to meters
         if (systemFrom.equalsIgnoreCase("Feet")) {
-            returnVal = convertF2M(value);
+            return convertF2M(value);
         }
 
         // Meters to feet
         if (systemFrom.equalsIgnoreCase("Meters")){
-            returnVal = convertM2F(value);
+            return convertM2F(value);
         }
 
         // Miles to kilometers
         if (systemFrom.equalsIgnoreCase("Miles")) {
-            returnVal = convertM2K(value);
+            return convertM2K(value);
         }
 
         // Kilometers to miles
         if (systemFrom.equalsIgnoreCase("Kilometers")){
-            returnVal = convertK2M(value);
+            return convertK2M(value);
         }
 
         // Gallons to liters
         if (systemFrom.equalsIgnoreCase("Gallons")) {
-            returnVal = convertG2L(value);
+            return convertG2L(value);
         }
 
         // Liters to gallons
         if (systemFrom.equalsIgnoreCase("Liters")){
-            returnVal = convertK2M(value);
+            return convertL2G(value);
         }
 
         // Ounces to grams
         if (systemFrom.equalsIgnoreCase("Ounces")) {
-            returnVal = convertOz2G(value);
+            return convertOz2G(value);
         }
 
         // Grams to ounces
         if (systemFrom.equalsIgnoreCase("Grams")){
-            returnVal = convertG2Oz(value);
+            return convertG2Oz(value);
         }
 
         // Pounds to kilograms
         if (systemFrom.equalsIgnoreCase("Pounds")) {
-            returnVal = convertLb2K(value);
+            return convertLb2K(value);
         }
 
         // Kilograms to pounds
         if (systemFrom.equalsIgnoreCase("Kilograms")){
-            returnVal = convertK2Lb(value);
+            return convertK2Lb(value);
         }
 
         // Hours to minutes
         if (systemFrom.equalsIgnoreCase("Hours")) {
-            returnVal = convertHrToMin(value);
+            return convertHr2Min(value);
         }
 
         // Minutes to hours
         if (systemFrom.equalsIgnoreCase("Minutes")){
-            returnVal = convertMinToHr(value);
+            return convertMin2Hr(value);
         }
 
-        return returnVal;
+        if (systemFrom.equalsIgnoreCase("MPH")) {
+            return convertMphToKph(value);
+        }
+
+        return -1.0f;
     }
 
     /**
@@ -336,6 +363,14 @@ public class ConversionTool extends Application {
         if (value.equalsIgnoreCase("Minutes")) {
             otherBox.setValue("Hours");
         }
+
+        if (value.equalsIgnoreCase("MPH")) {
+            otherBox.setValue("KPH");
+        }
+
+        if (value.equalsIgnoreCase("KPH")) {
+            otherBox.setValue("MPH");
+        }
     }
 
     /**
@@ -344,7 +379,7 @@ public class ConversionTool extends Application {
      * @param val the string value we are checking
      * @return true if the value is numeric, or false if it is not.
      */
-    private boolean isNumeric(String val) {
+    protected boolean isNumeric(String val) {
         Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
         if (val == null)
@@ -541,7 +576,7 @@ public class ConversionTool extends Application {
      * @param hours float value represented by a string.
      * @return converted minutes value as a float.
      */
-    public float convertHrToMin (String hours) {
+    public float convertHr2Min(String hours) {
         float num1, num2;
         num1 = convToFloat(hours);
         num2 = num1 * 60.0f;
@@ -554,11 +589,21 @@ public class ConversionTool extends Application {
      * @param mins float value represented by a string.
      * @return converted hours value as a float.
      */
-    public float convertMinToHr (String mins) {
+    public float convertMin2Hr(String mins) {
         float num1, num2;
         num1 = convToFloat(mins);
         num2 = num1 / 60.0f;
         return num2;
+    }
+
+    /**
+     * Method for converting miles per hour to kilometers per hour.
+     *
+     * @param val miles per hour float value.
+     * @return kilometers per hour float value.
+     */
+    public float convertMphToKph(String kph) {
+        return (convToFloat(kph) * 1.60934f);
     }
 
     /**
@@ -567,7 +612,7 @@ public class ConversionTool extends Application {
      * @param metric string representation we are converting to a float.
      * @return the float value of the passed string.
      */
-    private float convToFloat(String metric){
+    protected float convToFloat(String metric){
         return Float.parseFloat(metric);
     }
 
