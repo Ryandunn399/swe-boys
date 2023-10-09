@@ -106,10 +106,12 @@ public class ConversionTool extends Application {
             }
 
             String fromSystem = fromComboBox.getValue();
+            String toSystem = toComboBox.getValue();
 
             int numDecimal = Integer.parseInt(decimalBox.getValue());
 
-            float convertedVal = convert(inputVal, fromSystem);
+            float convertedVal = convertedVal = convert(inputVal, fromSystem, toSystem);
+
             String outputVal = retrieveOutput(convertedVal, numDecimal);
 
             outputField.setText(outputVal);
@@ -146,6 +148,8 @@ public class ConversionTool extends Application {
         options.add("Minutes");
         options.add("MPH");
         options.add("KPH");
+        options.add("Kelvin");
+        options.add("Celsius");
 
         return options;
     }
@@ -185,7 +189,7 @@ public class ConversionTool extends Application {
      * @param systemFrom the system we are converting from.
      * @return the value of the system we need to convert to.
      */
-    public float convert(String value, String systemFrom) {
+    public float convert(String value, String systemFrom, String systemTo) {
 
         if (systemFrom == null)
             return -1.0f;
@@ -197,7 +201,9 @@ public class ConversionTool extends Application {
 
         // Celsius to fahrenheit
         if (systemFrom.equalsIgnoreCase("Celsius")){
-            return convertC2F(value);
+            if (systemTo.equalsIgnoreCase("Fahrenheit")) {
+                return convertC2F(value);
+            }
         }
 
         // Inches to centimeters
@@ -274,6 +280,19 @@ public class ConversionTool extends Application {
             return convertMphToKph(value);
         }
 
+        if (systemFrom.equalsIgnoreCase("KPH")) {
+            return convertKphToMph(value);
+        }
+
+        if (systemFrom.equalsIgnoreCase("Kelvin")) {
+            return convertKelvinToCelsius(value);
+        }
+        if (systemFrom.equalsIgnoreCase("Celsius")) {
+            if (systemTo.equalsIgnoreCase("Kelvin")) {
+                return convertCelsiusToKelvin(value);
+            }
+        }
+
         return -1.0f;
     }
 
@@ -288,11 +307,6 @@ public class ConversionTool extends Application {
 
         if (value.equalsIgnoreCase("Fahrenheit")) {
             otherBox.setValue("Celsius");
-            return;
-        }
-
-        if (value.equalsIgnoreCase("Celsius")) {
-            otherBox.setValue("Fahrenheit");
             return;
         }
 
@@ -370,6 +384,10 @@ public class ConversionTool extends Application {
 
         if (value.equalsIgnoreCase("KPH")) {
             otherBox.setValue("MPH");
+        }
+
+        if (value.equalsIgnoreCase("Kelvin")) {
+            otherBox.setValue("Celsius");
         }
     }
 
@@ -599,7 +617,7 @@ public class ConversionTool extends Application {
     /**
      * Method for converting miles per hour to kilometers per hour.
      *
-     * @param mph miles per hour float value.
+     * @param mph miles per hour string value.
      * @return kilometers per hour float value.
      */
     public float convertMphToKph(String mph) {
@@ -609,11 +627,31 @@ public class ConversionTool extends Application {
     /**
      * Method for converting kilometers per hour to miles per hour.
      *
-     * @param kph miles per hour float value.
+     * @param kph miles per hour string value.
      * @return miles per hour float value.
      */
     public float convertKphToMph(String kph) {
         return (convToFloat(kph) * 0.62137f);
+    }
+
+    /**
+     * Method for converting Kelvin to Celsius
+     *
+     * @param kelvin Kelvin string value.
+     * @return Celsius float value.
+     */
+    public float convertKelvinToCelsius(String kelvin) {
+        return (convToFloat(kelvin) + -273.15f);
+    }
+
+    /**
+     * Method for converting Celsius to Kelvin.
+     *
+     * @param celsius Celsius string value.
+     * @return Kelvin float value.
+     */
+    public float convertCelsiusToKelvin(String celsius) {
+        return (convToFloat(celsius) + 273.15f);
     }
 
     /**

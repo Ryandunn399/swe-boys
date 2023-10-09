@@ -391,7 +391,7 @@ public class ConverterTest {
     }
 
     @Test
-    public void testOptionsValues() {
+    public void testOptionsValuesKPHMPH() {
         assertTrue(cov.getStringOptions().contains("MPH"));
         assertTrue(cov.getStringOptions().contains("KPH"));
     }
