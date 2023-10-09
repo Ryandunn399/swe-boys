@@ -599,11 +599,21 @@ public class ConversionTool extends Application {
     /**
      * Method for converting miles per hour to kilometers per hour.
      *
-     * @param val miles per hour float value.
+     * @param mph miles per hour float value.
      * @return kilometers per hour float value.
      */
-    public float convertMphToKph(String kph) {
-        return (convToFloat(kph) * 1.60934f);
+    public float convertMphToKph(String mph) {
+        return (convToFloat(mph) * 1.60934f);
+    }
+
+    /**
+     * Method for converting kilometers per hour to miles per hour.
+     *
+     * @param kph miles per hour float value.
+     * @return miles per hour float value.
+     */
+    public float convertKphToMph(String kph) {
+        return (convToFloat(kph) * 0.62137f);
     }
 
     /**

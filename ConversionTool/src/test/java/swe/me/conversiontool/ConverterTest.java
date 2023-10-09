@@ -395,4 +395,15 @@ public class ConverterTest {
         assertTrue(cov.getStringOptions().contains("MPH"));
         assertTrue(cov.getStringOptions().contains("KPH"));
     }
+
+    @Test
+    public void testMultipleKphToMph() {
+        final float mphValueOne = 0.62137f;
+        final float mphValueTwo = 1.24274f;
+        final float mphValueThree = -0.62137f;
+
+        assertEquals(mphValueOne, cov.convertKphToMph("1"), DELTA);
+        assertEquals(mphValueTwo, cov.convertKphToMph("2"), DELTA);
+        assertEquals(mphValueThree, cov.convertKphToMph("-1"), DELTA);
+    }
 }
