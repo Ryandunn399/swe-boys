@@ -352,10 +352,10 @@ public class ConverterTest {
         float expectedIn2Cm = 12.0f * 2.54f;
         float expectedHr2Min = 55.0f * 60.0f;
 
-        assertEquals(expectedF2C, cov.convert("100", "Fahrenheit"), DELTA);
-        assertEquals(expectedL2G, cov.convert("30", "Liters"), DELTA);
-        assertEquals(expectedIn2Cm, cov.convert("12", "Inches"), DELTA);
-        assertEquals(expectedHr2Min, cov.convert("55", "Hours"), DELTA);
+        assertEquals(expectedF2C, cov.convert("100", "Fahrenheit", "Celsius"), DELTA);
+        assertEquals(expectedL2G, cov.convert("30", "Liters", "Gallons"), DELTA);
+        assertEquals(expectedIn2Cm, cov.convert("12", "Inches", "Centimeters"), DELTA);
+        assertEquals(expectedHr2Min, cov.convert("55", "Hours", "Minutes"), DELTA);
     }
 
     /**
@@ -405,5 +405,21 @@ public class ConverterTest {
         assertEquals(mphValueOne, cov.convertKphToMph("1"), DELTA);
         assertEquals(mphValueTwo, cov.convertKphToMph("2"), DELTA);
         assertEquals(mphValueThree, cov.convertKphToMph("-1"), DELTA);
+    }
+
+    @Test
+    public void testMultipleKelvinToCelsius(){
+        float expectedValueOne = 26.85f;
+        float expectedValueTwo = 226.85f;
+        assertEquals(expectedValueOne, cov.convertKelvinToCelsius("300"), DELTA);
+        assertEquals(expectedValueTwo, cov.convertKelvinToCelsius("500"), DELTA);
+    }
+
+    @Test
+    public void testMultipleCelsiusToKelvin(){
+        float expectedValueOne = 273.15f;
+        float expectedValueTwo = 373.15f;
+        assertEquals(expectedValueOne, cov.convertCelsiusToKelvin("0"), DELTA);
+        assertEquals(expectedValueTwo, cov.convertCelsiusToKelvin("100"), DELTA);
     }
 }
