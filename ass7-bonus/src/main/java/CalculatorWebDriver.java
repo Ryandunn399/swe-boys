@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,24 +15,24 @@ public class CalculatorWebDriver {
     /**
      * This object will hold the input box for Fahrenheit.
      */
-    private final WebElement fElement;
+    private WebElement fElement;
 
     /**
      * This object will hold the input box for Celsius.
      */
-    private final WebElement cElement;
+    private WebElement cElement;
 
     /**
      * This object will hold the convert button element.
      */
-    private final WebElement convertBtn;
+    private WebElement convertBtn;
 
     /**
      * This object will hold our clear form button element.
      */
-    private final WebElement clearBtn;
+    private WebElement clearBtn;
 
-    private final WebDriver driver;
+    private WebDriver driver;
 
     /**
      * Class constructor. Will initialize a chrome driver.
@@ -62,6 +63,13 @@ public class CalculatorWebDriver {
      * @param value the text we want to input.
      */
     public void setFahrenheitValue(String value) {
+        try {
+            fElement.sendKeys(value);
+            return;
+        } catch (StaleElementReferenceException e) {
+            fElement = driver.findElement(By.name("F"));
+        }
+
         fElement.sendKeys(value);
     }
 
@@ -71,6 +79,13 @@ public class CalculatorWebDriver {
      * @param value the text we want to input.
      */
     public void setCelsiusValue(String value) {
+        try {
+            cElement.sendKeys(value);
+            return;
+        } catch (StaleElementReferenceException e) {
+            cElement = driver.findElement(By.name("C"));
+        }
+
         cElement.sendKeys(value);
     }
 
@@ -81,6 +96,12 @@ public class CalculatorWebDriver {
      * @return the text inside the Fahrenheit input box.
      */
     public String getFahrenheitValue() {
+        try {
+            return fElement.getAttribute("value");
+        } catch (StaleElementReferenceException e) {
+            fElement = driver.findElement(By.name("F"));
+        }
+
         return fElement.getAttribute("value");
     }
 
@@ -91,6 +112,12 @@ public class CalculatorWebDriver {
      * @return the text inside the Celsius input box.
      */
     public String getCelsiusValue() {
+        try {
+            return cElement.getAttribute("value");
+        } catch (StaleElementReferenceException e) {
+            cElement = driver.findElement(By.name("C"));
+        }
+
         return cElement.getAttribute("value");
     }
 
@@ -98,6 +125,13 @@ public class CalculatorWebDriver {
      * Will simulate clicking on the convert button.
      */
     public void convertClick() {
+        try {
+            convertBtn.click();
+            return;
+        } catch (StaleElementReferenceException e) {
+            convertBtn = driver.findElement(By.name("submit"));
+        }
+
         convertBtn.click();
     }
 
@@ -105,6 +139,13 @@ public class CalculatorWebDriver {
      * Will simulate clicking on the convert button.
      */
     public void clearClick() {
+        try {
+            clearBtn.click();
+            return;
+        } catch (StaleElementReferenceException e) {
+            clearBtn = driver.findElement(By.name("clear"));
+        }
+
         clearBtn.click();
     }
 }
