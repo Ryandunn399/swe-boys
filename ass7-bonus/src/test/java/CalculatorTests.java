@@ -140,7 +140,7 @@ public class CalculatorTests {
     @Test
     public void testCaseEight() {
         String fvalue = "0";
-        String cvalue = ;
+        String cvalue = "";
 
         String expectedFValue = "";
         String expectedCValue = "-17.78";
