@@ -27,7 +27,7 @@ public class CalculatorTests {
 
         String expectedFValue = "0";
         String expectedCValue = "0";
-        
+
         driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
