@@ -19,6 +19,23 @@ public class CalculatorTests {
         driver.close();
     }
 
+    // (true, convert, f = 0, c = 0)
+    @Test
+    public void testBaseCase() {
+        String fValue = "0";
+        String cValue = "0";
+
+        String expectedFValue = "0";
+        String expectedCValue = "0";
+        
+        driver.setFahrenheitValue(fValue);
+        driver.setCelsiusValue(cValue);
+
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, driver.getCelsiusValue());
+
+    }
+
     // (false, convert, f = 0, c = 0)
     @Test
     public void testCaseOne() {
@@ -31,9 +48,10 @@ public class CalculatorTests {
         driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
-        assertEquals(driver.getFahrenheitValue(), expectedFValue);
-        assertEquals(driver.getCelsiusValue(), expectedCValue);
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, driver.getCelsiusValue());
     }
+
     // (true, clear, f = 0, c = 0)
     @Test
     public void testCaseTwo() {
@@ -48,9 +66,10 @@ public class CalculatorTests {
 
         driver.clearClick();
 
-        assertEquals(driver.getFahrenheitValue(), expectedFValue);
-        assertEquals(driver.getCelsiusValue(), expectedCValue);
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, expectedCValue);
     }
+
     // (true, convert, f > 0, c = 0)
     @Test
     public void testCaseThree() {
@@ -65,9 +84,10 @@ public class CalculatorTests {
 
         driver.convertClick();
 
-        assertEquals(driver.getFahrenheitValue(), expectedFValue);
-        assertEquals(driver.getCelsiusValue(), expectedCValue);
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, driver.getCelsiusValue());
     }
+
     // (true, convert, f < 0, c = 0)
     @Test
     public void testCaseFour() {
@@ -82,16 +102,17 @@ public class CalculatorTests {
 
         driver.convertClick();
 
-        assertEquals(driver.getFahrenheitValue(), expectedFValue);
-        assertEquals(driver.getCelsiusValue(), expectedCValue);
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, driver.getCelsiusValue());
     }
+
     // (true, convert, f is empty, c = 0)
     @Test
     public void testCaseFive() {
         String fValue = "";
         String cValue = "0";
 
-        String expectedFValue = "32";
+        String expectedFValue = "32.0";
         String expectedCValue = "";
 
         driver.setFahrenheitValue(fValue);
@@ -99,9 +120,10 @@ public class CalculatorTests {
 
         driver.convertClick();
 
-        assertEquals(driver.getFahrenheitValue(), expectedFValue);
-        assertEquals(driver.getCelsiusValue(), expectedCValue);
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, driver.getCelsiusValue());
     }
+
     // (true, convert, f = 0, c > 0)
     @Test
     public void testCaseSix() {
@@ -116,9 +138,10 @@ public class CalculatorTests {
 
         driver.convertClick();
 
-        assertEquals(driver.getFahrenheitValue(), expectedFValue);
-        assertEquals(driver.getCelsiusValue(), expectedCValue);
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, driver.getCelsiusValue());
     }
+
     // (true, convert, f = 0, c < 0)
     @Test
     public void testCaseSeven() {
@@ -133,9 +156,10 @@ public class CalculatorTests {
 
         driver.convertClick();
 
-        assertEquals(driver.getFahrenheitValue(), expectedFValue);
-        assertEquals(driver.getCelsiusValue(), expectedCValue);
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, driver.getCelsiusValue());
     }
+
     // (true, convert, f = 0, c is empty)
     @Test
     public void testCaseEight() {
@@ -150,7 +174,7 @@ public class CalculatorTests {
 
         driver.convertClick();
 
-        assertEquals(driver.getFahrenheitValue(), expectedFValue);
-        assertEquals(driver.getCelsiusValue(), expectedCValue);
+        assertEquals(expectedFValue, driver.getFahrenheitValue());
+        assertEquals(expectedCValue, driver.getCelsiusValue());
     }
 }
