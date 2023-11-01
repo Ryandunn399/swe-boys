@@ -22,13 +22,13 @@ public class CalculatorTests {
     // (false, convert, f = 0, c = 0)
     @Test
     public void testCaseOne() {
-        String fvalue = "0";
-        String cvalue = "0";
+        String fValue = "0";
+        String cValue = "0";
 
-        String expectedFValue = "";
-        String expectedCValue = "";
+        String expectedFValue = "0";
+        String expectedCValue = "0";
 
-        driver.setFahrenheitValue(fvalue);
+        driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
         assertEquals(driver.getFahrenheitValue(), expectedFValue);
@@ -37,13 +37,13 @@ public class CalculatorTests {
     // (true, clear, f = 0, c = 0)
     @Test
     public void testCaseTwo() {
-        String fvalue = "0";
-        String cvalue = "0";
+        String fValue = "0";
+        String cValue = "0";
 
         String expectedFValue = "";
         String expectedCValue = "";
 
-        driver.setFahrenheitValue(fvalue);
+        driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
         driver.clearClick();
@@ -54,13 +54,13 @@ public class CalculatorTests {
     // (true, convert, f > 0, c = 0)
     @Test
     public void testCaseThree() {
-        String fvalue = "15";
-        String cvalue = "0";
+        String fValue = "15";
+        String cValue = "0";
 
         String expectedFValue = "32.0";
         String expectedCValue = "-9.44";
 
-        driver.setFahrenheitValue(fvalue);
+        driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
         driver.convertClick();
@@ -71,13 +71,13 @@ public class CalculatorTests {
     // (true, convert, f < 0, c = 0)
     @Test
     public void testCaseFour() {
-        String fvalue = "-20";
-        String cvalue = "0";
+        String fValue = "-20";
+        String cValue = "0";
 
         String expectedFValue = "32.0";
         String expectedCValue = "-28.89";
 
-        driver.setFahrenheitValue(fvalue);
+        driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
         driver.convertClick();
@@ -88,13 +88,13 @@ public class CalculatorTests {
     // (true, convert, f is empty, c = 0)
     @Test
     public void testCaseFive() {
-        String fvalue = "";
-        String cvalue = "0";
+        String fValue = "";
+        String cValue = "0";
 
         String expectedFValue = "32";
         String expectedCValue = "";
 
-        driver.setFahrenheitValue(fvalue);
+        driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
         driver.convertClick();
@@ -105,13 +105,13 @@ public class CalculatorTests {
     // (true, convert, f = 0, c > 0)
     @Test
     public void testCaseSix() {
-        String fvalue = "0";
-        String cvalue = "28";
+        String fValue = "0";
+        String cValue = "28";
 
         String expectedFValue = "82.4";
         String expectedCValue = "-17.78";
 
-        driver.setFahrenheitValue(fvalue);
+        driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
         driver.convertClick();
@@ -122,13 +122,13 @@ public class CalculatorTests {
     // (true, convert, f = 0, c < 0)
     @Test
     public void testCaseSeven() {
-        String fvalue = "0";
-        String cvalue = "-23";
+        String fValue = "0";
+        String cValue = "-23";
 
         String expectedFValue = "-9.4";
         String expectedCValue = "-17.78";
 
-        driver.setFahrenheitValue(fvalue);
+        driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
         driver.convertClick();
@@ -139,13 +139,13 @@ public class CalculatorTests {
     // (true, convert, f = 0, c is empty)
     @Test
     public void testCaseEight() {
-        String fvalue = "0";
-        String cvalue = "";
+        String fValue = "0";
+        String cValue = "";
 
         String expectedFValue = "";
         String expectedCValue = "-17.78";
 
-        driver.setFahrenheitValue(fvalue);
+        driver.setFahrenheitValue(fValue);
         driver.setCelsiusValue(cValue);
 
         driver.convertClick();
