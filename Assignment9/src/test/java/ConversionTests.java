@@ -31,8 +31,8 @@ public class ConversionTests {
     @After
     public void destroy() {
         this.c = null;
-        this.req = mock(HttpServletRequest.class);
-        this.res = mock(HttpServletResponse.class);
+        this.req = null;
+        this.res = null;
     }
 
     /**
