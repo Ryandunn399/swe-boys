@@ -36,6 +36,9 @@ import java.lang.*;
 public class Conversion extends HttpServlet
 {
 
+    public static void main(String[] args) {
+
+    }
 
     public void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
@@ -255,6 +258,7 @@ public class Conversion extends HttpServlet
         {  // Convert farenheit to celsius
             newvals.put("C", String.valueOf(convertF2C(FAsStr)));
         }
+
         if  (CAsStr != null && CAsStr.length() > 0)
         {  // Convert celsius to farenheit
             newvals.put("F", String.valueOf(convertC2F(CAsStr)));
@@ -265,6 +269,7 @@ public class Conversion extends HttpServlet
         {  // Convert inches to centimeters
             newvals.put("cm", String.valueOf(convertIn2Cm(inAsStr)));
         }
+
         if  (cmAsStr != null && cmAsStr.length() > 0)
         {  // Convert centimeters to inches
             newvals.put("in", String.valueOf(convertCm2In(cmAsStr)));
@@ -275,6 +280,7 @@ public class Conversion extends HttpServlet
         {  // Convert feet to meters
             newvals.put("m", String.valueOf(convertF2M(ftAsStr)));
         }
+
         if  (mAsStr != null && mAsStr.length() > 0)
         {  // Convert meters to feet
             newvals.put("ft", String.valueOf(convertM2F(mAsStr)));
@@ -285,6 +291,7 @@ public class Conversion extends HttpServlet
         {  // Convert miles to kilometers
             newvals.put("km", String.valueOf(convertM2K(miAsStr)));
         }
+
         if  (kmAsStr != null && kmAsStr.length() > 0)
         {  // Convert kilometers to miles
             newvals.put("mi", String.valueOf(convertK2M(kmAsStr)));
@@ -295,6 +302,7 @@ public class Conversion extends HttpServlet
         {  // Convert gallons to liters
             newvals.put("L", String.valueOf(convertG2L(galAsStr)));
         }
+
         if  (LAsStr != null && LAsStr.length() > 0)
         {  // Convert liters to gallons
             newvals.put("gal", String.valueOf(convertL2G(LAsStr)));
@@ -305,6 +313,7 @@ public class Conversion extends HttpServlet
         {  // Convert ounces to grams
             newvals.put("g", String.valueOf(convertOz2G(ozAsStr)));
         }
+
         if  (gAsStr != null && gAsStr.length() > 0)
         {  // Convert grams to ounces
             newvals.put("oz", String.valueOf(convertG2Oz(gAsStr)));
@@ -315,6 +324,7 @@ public class Conversion extends HttpServlet
         {  // Convert pounds to kilograms
             newvals.put("kg", String.valueOf(convertLb2K(lbAsStr)));
         }
+
         if (kgAsStr != null && kgAsStr.length() > 0)
         {  // Convert kilograms to pounds
             newvals.put("lb", String.valueOf(convertK2Lb(kgAsStr)));
