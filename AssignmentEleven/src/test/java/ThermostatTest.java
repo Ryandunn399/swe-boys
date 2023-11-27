@@ -83,4 +83,79 @@ public class ThermostatTest
         // Run the test
         assertTrue (thermo.turnHeaterOn (settings));
     }
+
+    //////////////////////////////////////////////////////////
+    //              START OF ASSIGNMENT ELEVEN              //
+    //////////////////////////////////////////////////////////
+
+    // Override is b and regulator is not even a part of the predicate above
+    // as a result, even though the assignment states we don't need to add any tests
+    // that might have already been implemented for CACC we need to essentially
+    // create a test for each scenario (TT, TF, FT) since the regulator value is never
+    // assigned or used
+
+    @Test
+    public void testTT() {
+        int curTemp = 68;
+        int overTemp = 72;
+        int expected = (curTemp - overTemp) / 2;
+        // We can copy the test from TTTT to ensure reachability of lines
+        // we are trying to test.
+        settings.setSetting (Period.MORNING, DayType.WEEKDAY, 70);
+        thermo.setPeriod (Period.MORNING);
+        thermo.setDay (DayType.WEEKDAY);
+        thermo.setCurrentTemp (curTemp);
+        thermo.setTimeSinceLastRun (10);
+        thermo.setMinLag (5);
+        thermo.setOverride (true);
+        thermo.setOverTemp (overTemp);
+        thermo.setRegulator(true);
+        thermo.turnHeaterOn(settings);
+
+        assertEquals(expected, thermo.getRunTime());
+    }
+
+    @Test
+    public void testTF() {
+        int curTemp = 68;
+        int overTemp = 72;
+
+        // we expect the if else to branch two lines after the predicate we are testing
+        int expected = curTemp - overTemp;
+        // We can copy the test from TTTT to ensure reachability of lines
+        // we are trying to test.
+        settings.setSetting (Period.MORNING, DayType.WEEKDAY, 70);
+        thermo.setPeriod (Period.MORNING);
+        thermo.setDay (DayType.WEEKDAY);
+        thermo.setCurrentTemp (curTemp);
+        thermo.setTimeSinceLastRun (10);
+        thermo.setMinLag (5);
+        thermo.setOverride (true);
+        thermo.setOverTemp (overTemp);
+        thermo.setRegulator(false);
+        thermo.turnHeaterOn(settings);
+
+        assertEquals(expected, thermo.getRunTime());
+    }
+
+    @Test
+    public void testFT() {
+        int curTemp = 68;
+        // We can copy the test from TTTT to ensure reachability of lines
+        // we are trying to test.
+        settings.setSetting (Period.MORNING, DayType.WEEKDAY, 70);
+        thermo.setPeriod (Period.MORNING);
+        thermo.setDay (DayType.WEEKDAY);
+        thermo.setCurrentTemp (curTemp);
+        thermo.setTimeSinceLastRun (10);
+        thermo.setMinLag (5);
+        thermo.setOverride (false);
+        thermo.setRegulator(true);
+        thermo.turnHeaterOn(settings);
+
+        int dTemp = settings.getSetting(Period.MORNING, DayType.WEEKDAY);
+        int expected = curTemp - dTemp;
+
+        assertEquals(expected, thermo.getRunTime());
+    }
 }

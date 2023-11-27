@@ -64,7 +64,7 @@ public class Thermostat
 
     // outputs from turnHeaterOn
     void    setRunTime(int minutes)    { runTime = minutes; }
-    int     getRunTime()               { return runTime; }
+    public int     getRunTime()               { return runTime; }
     void    setHeaterOn(boolean value) { heaterOn = value; }
     boolean getHeaterOn()              { return heaterOn; }
 } // End Thermostat class
