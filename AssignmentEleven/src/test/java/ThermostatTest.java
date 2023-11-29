@@ -13,6 +13,23 @@ import org.swebois.eleven.Thermostat;
 
 import static org.junit.Assert.*;
 
+/**
+ * Collab Summary
+ * Ryan Dunn, DJ Kim, and Liam Sardesai
+ * Due to this assignment being short, all three members of the group communicated about
+ * what would qualify for CACC and how to go about writing the tests.  Ryan Dunn then
+ * quickly wrote everything including the collab summary and identified problems inside this test file
+ * with the assistance of his group.
+ *
+ * Identifying Problems
+ * One major problem identified when creating the tests to satisfy CACC coverage of line 35
+ * was that it had a revealability problem when testing.
+ * The line we are testing assigns the runTime variable to some value,
+ * but the oracle is unable to read that value because the class makes
+ * both the variable and the getter method private.
+ * In order to resolve this issue, we simply had to make the
+ * getRunTime() method public for our test to actually evaluate the necessary value.
+ */
 public class ThermostatTest
 {
     private Thermostat thermo;
